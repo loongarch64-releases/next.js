@@ -1,4 +1,4 @@
-# Next.js (LoongArch64 Build)
+# Next.js (LoongArch64 Build) --> only libnext_binding.so now
 
 [![Build Status](https://github.com/loongarch64-releases/next.js/actions/workflows/release.yml/badge.svg)](https://github.com/loongarch64-releases/next.js/actions)
 
