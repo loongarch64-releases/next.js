@@ -1,0 +1,24 @@
+FROM alpine:3.23.0
+
+RUN apk add --no-cache \
+    curl \
+    wget \
+    git \
+    build-base \
+    clang19 \
+    llvm19 \
+    llvm19-dev \
+    llvm19-static \
+    clang19-dev \
+    clang19-static \
+    openssl-dev \
+    pkgconfig \
+    linux-headers \
+    protobuf-dev \
+    zlib-dev \
+    nodejs \
+    pnpm
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+CMD ["/bin/sh"]
