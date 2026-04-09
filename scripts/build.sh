@@ -28,7 +28,7 @@ prepare()
     echo "📦 [Prepare] Setting up build environment..."
     
     source "$HOME/.cargo/env"
-    git clone -b "${VERSION}" --depth 1 "https://github.com/vercel/next.js.git" "${SRCS}/${VERSION}"
+    git clone -b "${VERSION}" --depth 1 "https://github.com/${UPSTREAM_OWNER}/${UPSTREAM_REPO}.git" "${SRCS}/${VERSION}"
     "${PATCHES}/patch.sh" "${SRCS}/${VERSION}"
     
     echo "✅ [Prepare] Environment ready."
