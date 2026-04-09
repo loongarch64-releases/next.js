@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eou pipefail
+set -eu
 
 UPSTREAM_OWNER=vercel
 UPSTREAM_REPO=next.js

@@ -2,13 +2,12 @@
 # 开启严格模式：
 # -e: 命令失败即退出
 # -u: 引用未定义变量即退出 (关键！)
-# -o pipefail: 管道失败即退出
-set -euo pipefail
+set -eu
 
 UPSTREAM_OWNER=vercel
 UPSTREAM_REPO=next.js
 VERSION="${1}"
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 ROOT_DIR="$(dirname "$SCRIPT_DIR")"
 
 DOCKER_IMAGE_NAME="${UPSTREAM_OWNER}/${UPSTREAM_REPO}-build-env"
