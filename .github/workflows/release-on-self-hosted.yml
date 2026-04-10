@@ -25,8 +25,7 @@ jobs:
         id: get_version
         run: |
           chmod +x ./scripts/get_version.sh
-          #LATEST_VERSION=$(./scripts/get_version.sh)
-          LATEST_VERSION=v16.2.2
+          LATEST_VERSION=$(./scripts/get_version.sh)
           # 1. 获取上游最新版本
           echo "Latest upstream version: $LATEST_VERSION"
 
