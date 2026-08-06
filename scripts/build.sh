@@ -27,10 +27,8 @@ prepare()
 {
     echo "📦 [Prepare] Setting up build environment..."
     
-    source "$HOME/.cargo/env"
     git clone -b "${VERSION}" --depth 1 "https://github.com/${UPSTREAM_OWNER}/${UPSTREAM_REPO}.git" "${SRCS}/${VERSION}"
     "${PATCHES}/patch.sh" "${SRCS}/${VERSION}"
-    
     echo "✅ [Prepare] Environment ready."
 }
 
@@ -42,10 +40,6 @@ build()
     (
       cd "${SRCS}/${VERSION}"
 
-      cargo build --release -p next-napi-bindings --target loongarch64-unknown-linux-musl || true
-      cty=$(find ~/.cargo/registry/src -name cty*)/src/lib.rs
-      sed -i '/target_arch = "mips64"/a \
-          target_arch = "loongarch64",' "${cty}"
       cargo build --release -p next-napi-bindings --target loongarch64-unknown-linux-musl
     )
 
