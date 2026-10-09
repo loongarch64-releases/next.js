@@ -4,13 +4,20 @@ SRC=${1}
 
 add_target()
 {
+    # 这里只开 LSX
+    # v16.4.0 把 rust-toolchain 从 nightly-2026-07-29 升到 nightly-2026-08-20,
+    # 新 nightly 自带的 LLVM 在 LoongArch LASX 上无法选择
+    # `sign_extend_vector_inreg`(v4i64),而 roaring 的
+    # RoaringBitmap::intersection_len 被循环向量化成 256 位后正好触发它,
+    # 直接以 "rustc-LLVM ERROR: Cannot select: ... sign_extend_vector_inreg" 中断构建。
+    # 关掉 LASX 后向量化宽度回到 128 位,可以正常编译(等 LLVM/rustc 修好后再考虑加回)。
     cat << 'EOF' >> "${SRC}/.cargo/config.toml"
 [target.loongarch64-unknown-linux-musl]
 rustflags = [
   "--cfg", "tokio_unstable",
   "-Zshare-generics=y",
   "-Zthreads=8",
-  "-Ctarget-feature=+lsx,+lasx", 
+  "-Ctarget-feature=+lsx",
   "-Csymbol-mangling-version=v0",
   "-Clink-arg=-static-libgcc",
 ]
